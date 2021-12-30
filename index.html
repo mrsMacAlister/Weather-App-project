@@ -15,9 +15,48 @@
   </head>
   <body>
     <div class="container">
-      <!--<div class="card">-->
-      <h1>Setup</h1>
-      <button type="button" class="btn btn-warning">Search</button>
+      <div class="card">
+        <form id-="search-form">
+          <div class="row">
+            <div id="search-bar" class="col-9">
+              <input type="text" placeholder="Enter your city" />
+            </div>
+            <div id="search-button" class="col-3">
+              <button id="search-btn" class="btn btn-warning" type="submit">
+                Search
+              </button>
+            </div>
+          </div>
+        </form>
+        <div class="row">
+          <div id="big-icon" class="col-2">
+            <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="" />
+          </div>
+          <div id="weather-info" class="col-5">
+            <h2 id="big-degrees">
+              30 <span id="celsius">°C</span> | <span id="fahrenheit">°F</span>
+            </h2>
+            <ul id="weather-description">
+              <li id="sky">Sunny</li>
+              <li id="humidity">55%</li>
+              <!--add % in JS-->
+              <li id="wind">14 khm/h</li>
+              <!--in JS add km/h for metric and mph for imperial-->
+            </ul>
+          </div>
+          <div id="time-info" class="col-5">
+            <h2 id="city">Taipei</h2>
+            <ul id="time-date">
+              <li id="country">TW</li>
+              <li id="time">05:20</li>
+              <li id="day">Thursday</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <footer style="font-size: small">
+        <a href="" target="_blank"> Open-source code</a> by mrs.MacAlister
+      </footer>
     </div>
 
     <script src="src/app.js"></script>
