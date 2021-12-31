@@ -17,11 +17,11 @@
     <div class="container">
       <div class="card">
         <form id-="search-form">
-          <div class="row">
-            <div id="search-bar" class="col-9">
+          <div class="row search-line">
+            <div id="search-bar" class="col-9 form-el">
               <input type="text" placeholder="Enter your city" />
             </div>
-            <div id="search-button" class="col-3">
+            <div id="search-button" class="col-3 form-el">
               <button id="search-btn" class="btn btn-warning" type="submit">
                 Search
               </button>
@@ -29,8 +29,12 @@
           </div>
         </form>
         <div class="row">
-          <div id="big-icon" class="col-2">
-            <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="" />
+          <div class="col-2 weather-icon">
+            <img
+              id="big-icon"
+              src="http://openweathermap.org/img/wn/10d@2x.png"
+              alt=""
+            />
           </div>
           <div id="weather-info" class="col-5">
             <h2 id="big-degrees">
