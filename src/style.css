@@ -1,9 +1,10 @@
 body {
   font-family: monospace, "Courier New", Courier;
+  color: rgba(0, 0, 0, 0.8);
 }
 
 .card {
-  max-width: 600px;
+  max-width: 500px;
   margin: 50px auto 0px;
   padding: 15px;
   border: 1px solid rgba(211, 211, 211, 1);
@@ -17,22 +18,23 @@ body {
 }
 
 form {
-  margin-bottom: 10px;
+  width: 100%;
+  align-self: center;
 }
 
 #search-bar {
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
 }
 
 input {
   width: 100%;
   align-self: center;
-  margin-left: 6px;
+  margin-left: 10px;
   padding: 5px 10px;
 
   border: 1px solid rgba(0, 0, 0, 0.466);
-  border-radius: 6px;
+  border-radius: 6px 0px 0px 6px;
 }
 
 #search-button {
@@ -43,10 +45,38 @@ input {
 #search-btn {
   border: 1px solid rgba(0, 0, 0, 0.466);
   border-radius: 6px;
+  padding: 5px 10px;
+}
+
+.information {
+  margin-top: 15px;
+}
+
+.weather-icon {
+  padding: 0;
 }
 
 #big-icon {
   max-width: 75px;
+  margin-top: 15px;
+}
+
+#temp-units {
+  font-size: 16px;
+  position: relative;
+  top: -5px;
+}
+
+#celsius:hover {
+  color: blue;
+  transition: 100ms ease-in-out;
+  font-size: 20px;
+}
+
+#fahrenheits:hover {
+  color: blue;
+  transition: 100ms ease-in-out;
+  font-size: 20px;
 }
 
 ul {
@@ -57,4 +87,5 @@ ul {
 footer {
   text-align: center;
   max-width: 600px;
+  margin: 6px auto;
 }

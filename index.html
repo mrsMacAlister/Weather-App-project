@@ -11,6 +11,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="src/style.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>Weather App</title>
   </head>
   <body>
@@ -28,7 +29,7 @@
             </div>
           </div>
         </form>
-        <div class="row">
+        <div class="row information">
           <div class="col-2 weather-icon">
             <img
               id="big-icon"
@@ -38,13 +39,17 @@
           </div>
           <div id="weather-info" class="col-5">
             <h2 id="big-degrees">
-              30 <span id="celsius">°C</span> | <span id="fahrenheit">°F</span>
+              30<span id="temp-units">
+                <span id="celsius">°C</span>|<span id="fahrenheits"
+                  >°F</span
+                ></span
+              ></span>
             </h2>
             <ul id="weather-description">
               <li id="sky">Sunny</li>
               <li id="humidity">55%</li>
               <!--add % in JS-->
-              <li id="wind">14 khm/h</li>
+              <li id="wind">14 km/h</li>
               <!--in JS add km/h for metric and mph for imperial-->
             </ul>
           </div>
