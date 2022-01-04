@@ -1,4 +1,3 @@
-//TIME & DATE
 function showTime(time) {
   let currentHour = time.getHours();
   if (currentHour < 10) {
@@ -36,8 +35,6 @@ function showDay(day) {
 let dayElement = document.querySelector("#day");
 let currentDay = new Date();
 dayElement.innerHTML = showDay(currentDay);
-
-// SEARCH CITY
 
 function searchCity(event) {
   event.preventDefault();
@@ -81,8 +78,19 @@ function showTemp(response) {
   let windUnit = document.querySelector("#windUnit");
   windUnit.innerHTML = `km/h`;
 
-  showTime();
-  showDay();
+  let country = response.data.sys.country;
+
+  let currentCountry = document.querySelector("#country");
+  currentCountry.innerHTML = country;
+
+  let colorC = document.querySelector("#celsius");
+  colorC.style.color = "#0d6efd";
+
+  let colorF = document.querySelector("#fahrenheits");
+  colorF.style.color = `rgba(0, 0, 0, 0.8)`;
+
+  //showTime();
+  //showDay();
 }
 
 function clickFahrenheits(response) {
@@ -113,8 +121,15 @@ function showFahrenheits(response) {
   let windUnit = document.querySelector("#windUnit");
   windUnit.innerHTML = `mph`;
 
-  showTime();
-  showDay();
+  let colorF = document.querySelector("#fahrenheits");
+  colorF.style.color = "#0d6efd";
+  //colorC.classList.remove("hover-unit:hover");
+
+  let colorC = document.querySelector("#celsius");
+  colorC.style.color = `rgba(0, 0, 0, 0.8)`;
+  //colorF.classList.add("hover-unit:hover");
+  //showTime();
+  //showDay();
 }
 
 let fahrenheits = document.querySelector("#fahrenheits");
@@ -133,27 +148,32 @@ function clickCelsius(response) {
 let celsius = document.querySelector("#celsius");
 celsius.addEventListener("click", clickCelsius);
 
-/*
-let form = document.querySelector("#search-form");
-form.addEventListener("submit", searchCity);*/
-/*let searchButton = document.querySelector("button");
-dearchButton.addEventListener("click", searchCity);*/
-
 // CURRENT LOCATION - geolocation - navigator;
 
-// CURRENT LOCATION TEMPERATURE & othr info
+function showMyLocation(response) {
+  let city = response.data.name;
+  console.log(city);
+  let cityName = document.querySelector("#city");
+  cityName.innerHTML = city;
 
-// CITY TEMPERATURE & othr info
+  let units = `metric`;
+  let apiKey = `4c09ae07987b07a4993b3f7e761af71d`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
 
-// CESLSIUS
+  axios.get(apiUrl).then(showTemp);
+}
 
-//FAHRENHEITS (& mph)
-/*
-let city = `Taipei`;
-let apiKey = `4c09ae07987b07a4993b3f7e761af71d`;
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+function findMyLocation(position) {
+  let lat = position.coords.latitude;
+  console.log(lat);
+  let long = position.coords.longitude;
+  console.log(long);
 
-axios.get(apiUrl).then();
+  let units = `metric`;
+  let apiKey = `4c09ae07987b07a4993b3f7e761af71d`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=${units}`;
 
-navigator.geolocation.getCurrentPosition;
-*/
+  axios.get(apiUrl).then(showMyLocation);
+}
+
+navigator.geolocation.getCurrentPosition(findMyLocation);
