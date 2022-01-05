@@ -77,6 +77,12 @@ function showTemp(response) {
   currentWind.innerHTML = windSpeed;
   let windUnit = document.querySelector("#windUnit");
   windUnit.innerHTML = `km/h`;
+  let weatherIcon = document.querySelector("#big-icon");
+  weatherIcon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  weatherIcon.setAttribute("alt", response.data.weather[0].description);
 
   let country = response.data.sys.country;
 
@@ -120,6 +126,12 @@ function showFahrenheits(response) {
   currentWind.innerHTML = windSpeed;
   let windUnit = document.querySelector("#windUnit");
   windUnit.innerHTML = `mph`;
+  let weatherIcon = document.querySelector("#big-icon");
+  weatherIcon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  weatherIcon.setAttribute("alt", response.data.weather[0].description);
 
   let colorF = document.querySelector("#fahrenheits");
   colorF.style.color = "#0d6efd";
