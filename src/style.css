@@ -93,7 +93,7 @@ ul {
   padding: 0;
 }
 
-li {
+#sky {
   text-transform: capitalize;
 }
 
@@ -102,6 +102,10 @@ li {
 }
 #time-info {
   padding-left: 0;
+}
+
+#forecast {
+  text-align: center;
 }
 
 footer {

@@ -36,6 +36,39 @@ let dayElement = document.querySelector("#day");
 let currentDay = new Date();
 dayElement.innerHTML = showDay(currentDay);
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  forecastHTML = `<div class="row">`;
+  let days = ["Sat", "Sun", "Mon"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+            <div class="col-2">
+              <ul class="daily">
+                <li class="future">
+                  <img class="mini-icon1" src="https://openweathermap.org/img/wn/01d@2x.png"
+              width="42"></i>
+                </li>
+                <li class="future">
+                  <div class="temp">
+                    17°<span class="small-degrees">C</span>
+                    <strong
+                      >22°<span class="small-degrees-strong">C</span></strong
+                    >
+                  </div>
+                </li>
+                <li class="future">
+                  <h5>${day}</h5>
+                </li>
+              </ul>
+            </div>
+          `;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function searchCity(event) {
   event.preventDefault();
   let city = document.querySelector("#city-search");
@@ -80,7 +113,7 @@ function showTemp(response) {
   let weatherIcon = document.querySelector("#big-icon");
   weatherIcon.setAttribute(
     "src",
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   weatherIcon.setAttribute("alt", response.data.weather[0].description);
 
@@ -97,6 +130,7 @@ function showTemp(response) {
 
   //showTime();
   //showDay();
+  displayForecast();
 }
 
 function clickFahrenheits(response) {
@@ -129,7 +163,7 @@ function showFahrenheits(response) {
   let weatherIcon = document.querySelector("#big-icon");
   weatherIcon.setAttribute(
     "src",
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   weatherIcon.setAttribute("alt", response.data.weather[0].description);
 
@@ -142,6 +176,7 @@ function showFahrenheits(response) {
   //colorF.classList.add("hover-unit:hover");
   //showTime();
   //showDay();
+  displayForecast();
 }
 
 let fahrenheits = document.querySelector("#fahrenheits");
