@@ -109,35 +109,51 @@ function getForecast(coordinates) {
   axios.get(apiUrl).then(displayForecast);
 }
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+
+  return days[day];
+}
+
 function displayForecast(response) {
-  console.log(response.data.daily);
+  let forecastDaily = response.data.daily;
+  console.log(forecastDaily);
   let forecastElement = document.querySelector("#forecast");
   forecastHTML = `<div class="row">`;
-  let days = ["Sat", "Sun", "Mon"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
+  forecastDaily.forEach(function (forecast, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `
             <div class="col-2">
               <ul class="daily">
                 <li class="future">
-                  <img class="mini-icon1" src="https://openweathermap.org/img/wn/01d@2x.png"
+                  <img class="mini-icon1" src="https://openweathermap.org/img/wn/${
+                    forecast.weather[0].icon
+                  }@2x.png"
               width="42"></i>
                 </li>
                 <li class="future">
-                  <div class="temp">
-                    17°<span class="small-degrees">C</span>
+                  <div class="temp small-forecast">
+                    ${Math.round(
+                      forecast.temp.min
+                    )}°<span class="small-degrees">C</span> <br />
                     <strong
-                      >22°<span class="small-degrees-strong">C</span></strong
+                      >${Math.round(
+                        forecast.temp.max
+                      )}°<span class="small-degrees-strong">C</span></strong
                     >
                   </div>
                 </li>
                 <li class="future">
-                  <h5>${day}</h5>
+                  <h5 class="small-forecast">${formatDay(forecast.dt)}</h5>
                 </li>
               </ul>
             </div>
           `;
+    }
   });
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
