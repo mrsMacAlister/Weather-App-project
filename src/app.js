@@ -202,7 +202,66 @@ function showFahrenheits(response) {
   //colorF.classList.add("hover-unit:hover");
   //showTime();
   //showDay();
-  displayForecast();
+  getForecastFahrenheits(response.data.coord);
+}
+
+function getForecastFahrenheits(coordinates) {
+  console.log(coordinates);
+  let units = "imperial";
+  let apiKey = `4c09ae07987b07a4993b3f7e761af71d`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${units}`;
+  console.log(apiUrl);
+  axios.get(apiUrl).then(displayForecastFahrenheits);
+}
+
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+
+  return days[day];
+}
+
+function displayForecastFahrenheits(response) {
+  let forecastDaily = response.data.daily;
+  console.log(forecastDaily);
+  let forecastElement = document.querySelector("#forecast");
+  forecastHTML = `<div class="row">`;
+  forecastDaily.forEach(function (forecast, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `
+            <div class="col-2">
+              <ul class="daily">
+                <li class="future">
+                  <img class="mini-icon1" src="https://openweathermap.org/img/wn/${
+                    forecast.weather[0].icon
+                  }@2x.png"
+              width="42"></i>
+                </li>
+                <li class="future">
+                  <div class="temp small-forecast">
+                    ${Math.round(
+                      forecast.temp.min
+                    )}°<span class="small-degrees">F</span> <br />
+                    <strong
+                      >${Math.round(
+                        forecast.temp.max
+                      )}°<span class="small-degrees-strong">F</span></strong
+                    >
+                  </div>
+                </li>
+                <li class="future">
+                  <h5 class="small-forecast">${formatDay(forecast.dt)}</h5>
+                </li>
+              </ul>
+            </div>
+          `;
+    }
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
 }
 
 let fahrenheits = document.querySelector("#fahrenheits");
