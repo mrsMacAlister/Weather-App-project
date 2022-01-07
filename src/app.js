@@ -1,4 +1,6 @@
-function showTime(time) {
+function showTime() {
+  let timeElement = document.querySelector("#time");
+  let time = new Date();
   let currentHour = time.getHours();
   if (currentHour < 10) {
     currentHour = `0${currentHour}`;
@@ -8,16 +10,12 @@ function showTime(time) {
     currentMinutes = `0${currentMinutes}`;
   }
   let currentTime = `${currentHour}:${currentMinutes}`;
-  //console.log(currentTime);
-
-  return currentTime;
+  timeElement.innerHTML = currentTime;
 }
 
-let timeElement = document.querySelector("#time");
-let currentTime = new Date();
-timeElement.innerHTML = showTime(currentTime);
-
-function showDay(day) {
+function showDay() {
+  let dayElement = document.querySelector("#day");
+  let day = new Date();
   let days = [
     "Sunday",
     "Monday",
@@ -28,13 +26,8 @@ function showDay(day) {
     "Saturday",
   ];
   let currentDay = days[day.getDay()];
-
-  return currentDay;
+  dayElement.innerHTML = currentDay;
 }
-
-let dayElement = document.querySelector("#day");
-let currentDay = new Date();
-dayElement.innerHTML = showDay(currentDay);
 
 function searchCity(event) {
   event.preventDefault();
@@ -95,8 +88,8 @@ function showTemp(response) {
   let colorF = document.querySelector("#fahrenheits");
   colorF.style.color = `rgba(0, 0, 0, 0.8)`;
 
-  //showTime();
-  //showDay();
+  showTime();
+  showDay();
   getForecast(response.data.coord);
 }
 
@@ -200,8 +193,8 @@ function showFahrenheits(response) {
   let colorC = document.querySelector("#celsius");
   colorC.style.color = `rgba(0, 0, 0, 0.8)`;
   //colorF.classList.add("hover-unit:hover");
-  //showTime();
-  //showDay();
+  showTime();
+  showDay();
   getForecastFahrenheits(response.data.coord);
 }
 
@@ -262,6 +255,8 @@ function displayForecastFahrenheits(response) {
   });
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
+  showDay();
+  showTime();
 }
 
 let fahrenheits = document.querySelector("#fahrenheits");
