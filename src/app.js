@@ -8,7 +8,7 @@ function showTime(time) {
     currentMinutes = `0${currentMinutes}`;
   }
   let currentTime = `${currentHour}:${currentMinutes}`;
-  console.log(currentTime);
+  //console.log(currentTime);
 
   return currentTime;
 }
@@ -40,7 +40,7 @@ function searchCity(event) {
   event.preventDefault();
   let city = document.querySelector("#city-search");
   city = city.value;
-  console.log(city);
+  //console.log(city);
   city = city.trim();
 
   let cityCaps = city.charAt(0).toUpperCase() + city.slice(1);
@@ -61,14 +61,14 @@ searchForm.addEventListener("submit", searchCity);
 
 function showTemp(response) {
   let temperature = Math.round(response.data.main.temp);
-  console.log(temperature);
+  //console.log(temperature);
   let currentTemp = document.querySelector("#current-temp");
   currentTemp.innerHTML = temperature;
 
   let weather = response.data.weather[0].main; //(sky)
   let currentWeather = document.querySelector("#sky");
   currentWeather.innerHTML = weather;
-  console.log(weather);
+  //console.log(weather);
   let humidity = response.data.main.humidity;
   let currentHumidity = document.querySelector("#humidity");
   currentHumidity.innerHTML = humidity;
@@ -101,11 +101,11 @@ function showTemp(response) {
 }
 
 function getForecast(coordinates) {
-  console.log(coordinates);
+  //console.log(coordinates);
   let units = "metric";
   let apiKey = `4c09ae07987b07a4993b3f7e761af71d`;
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${units}`;
-  console.log(apiUrl);
+  //console.log(apiUrl);
   axios.get(apiUrl).then(displayForecast);
 }
 
@@ -119,7 +119,7 @@ function formatDay(timestamp) {
 
 function displayForecast(response) {
   let forecastDaily = response.data.daily;
-  console.log(forecastDaily);
+  //console.log(forecastDaily);
   let forecastElement = document.querySelector("#forecast");
   forecastHTML = `<div class="row">`;
   forecastDaily.forEach(function (forecast, index) {
@@ -170,14 +170,14 @@ function clickFahrenheits(response) {
 }
 function showFahrenheits(response) {
   let temperature = Math.round(response.data.main.temp);
-  console.log(temperature);
+  //console.log(temperature);
   let currentTemp = document.querySelector("#current-temp");
   currentTemp.innerHTML = temperature;
 
   let weather = response.data.weather[0].main; //(sky)
   let currentWeather = document.querySelector("#sky");
   currentWeather.innerHTML = weather;
-  console.log(weather);
+  //console.log(weather);
   let humidity = response.data.main.humidity;
   let currentHumidity = document.querySelector("#humidity");
   currentHumidity.innerHTML = humidity;
@@ -206,11 +206,11 @@ function showFahrenheits(response) {
 }
 
 function getForecastFahrenheits(coordinates) {
-  console.log(coordinates);
+  //console.log(coordinates);
   let units = "imperial";
   let apiKey = `4c09ae07987b07a4993b3f7e761af71d`;
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${units}`;
-  console.log(apiUrl);
+  //console.log(apiUrl);
   axios.get(apiUrl).then(displayForecastFahrenheits);
 }
 
@@ -224,7 +224,7 @@ function formatDay(timestamp) {
 
 function displayForecastFahrenheits(response) {
   let forecastDaily = response.data.daily;
-  console.log(forecastDaily);
+  //console.log(forecastDaily);
   let forecastElement = document.querySelector("#forecast");
   forecastHTML = `<div class="row">`;
   forecastDaily.forEach(function (forecast, index) {
@@ -284,7 +284,7 @@ celsius.addEventListener("click", clickCelsius);
 
 function showMyLocation(response) {
   let city = response.data.name;
-  console.log(city);
+  //console.log(city);
   let cityName = document.querySelector("#city");
   cityName.innerHTML = city;
 
@@ -297,9 +297,9 @@ function showMyLocation(response) {
 
 function findMyLocation(position) {
   let lat = position.coords.latitude;
-  console.log(lat);
+  //console.log(lat);
   let long = position.coords.longitude;
-  console.log(long);
+  //console.log(long);
 
   let units = `metric`;
   let apiKey = `4c09ae07987b07a4993b3f7e761af71d`;
