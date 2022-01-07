@@ -36,39 +36,6 @@ let dayElement = document.querySelector("#day");
 let currentDay = new Date();
 dayElement.innerHTML = showDay(currentDay);
 
-function displayForecast() {
-  let forecastElement = document.querySelector("#forecast");
-  forecastHTML = `<div class="row">`;
-  let days = ["Sat", "Sun", "Mon"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
-            <div class="col-2">
-              <ul class="daily">
-                <li class="future">
-                  <img class="mini-icon1" src="https://openweathermap.org/img/wn/01d@2x.png"
-              width="42"></i>
-                </li>
-                <li class="future">
-                  <div class="temp">
-                    17°<span class="small-degrees">C</span>
-                    <strong
-                      >22°<span class="small-degrees-strong">C</span></strong
-                    >
-                  </div>
-                </li>
-                <li class="future">
-                  <h5>${day}</h5>
-                </li>
-              </ul>
-            </div>
-          `;
-  });
-  forecastHTML = forecastHTML + `</div>`;
-  forecastElement.innerHTML = forecastHTML;
-}
-
 function searchCity(event) {
   event.preventDefault();
   let city = document.querySelector("#city-search");
@@ -130,7 +97,50 @@ function showTemp(response) {
 
   //showTime();
   //showDay();
-  displayForecast();
+  getForecast(response.data.coord);
+}
+
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let units = "metric";
+  let apiKey = `4c09ae07987b07a4993b3f7e761af71d`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${units}`;
+  console.log(apiUrl);
+  axios.get(apiUrl).then(displayForecast);
+}
+
+function displayForecast(response) {
+  console.log(response.data.daily);
+  let forecastElement = document.querySelector("#forecast");
+  forecastHTML = `<div class="row">`;
+  let days = ["Sat", "Sun", "Mon"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+            <div class="col-2">
+              <ul class="daily">
+                <li class="future">
+                  <img class="mini-icon1" src="https://openweathermap.org/img/wn/01d@2x.png"
+              width="42"></i>
+                </li>
+                <li class="future">
+                  <div class="temp">
+                    17°<span class="small-degrees">C</span>
+                    <strong
+                      >22°<span class="small-degrees-strong">C</span></strong
+                    >
+                  </div>
+                </li>
+                <li class="future">
+                  <h5>${day}</h5>
+                </li>
+              </ul>
+            </div>
+          `;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
 }
 
 function clickFahrenheits(response) {
