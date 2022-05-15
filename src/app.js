@@ -29,29 +29,6 @@ function showDay() {
   dayElement.innerHTML = currentDay;
 }
 
-function searchCity(event) {
-  event.preventDefault();
-  let city = document.querySelector("#city-search");
-  city = city.value;
-  //console.log(city);
-  city = city.trim();
-
-  let cityCaps = city.charAt(0).toUpperCase() + city.slice(1);
-  //city.innerHTML = cityCaps;
-  let cityName = document.querySelector("#city");
-  cityName.innerHTML = cityCaps;
-
-  let units = `metric`;
-  let apiKey = `4c09ae07987b07a4993b3f7e761af71d`;
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityCaps}&appid=${apiKey}&units=${units}`;
-  //https://api.openweathermap.org/data/2.5/weather?q=Taipei&appid=4c09ae07987b07a4993b3f7e761af71d&units=metric`;
-
-  axios.get(apiUrl).then(showTemp);
-}
-
-let searchForm = document.querySelector("form");
-searchForm.addEventListener("submit", searchCity);
-
 function showTemp(response) {
   let temperature = Math.round(response.data.main.temp);
   //console.log(temperature);
@@ -207,14 +184,6 @@ function getForecastFahrenheits(coordinates) {
   axios.get(apiUrl).then(displayForecastFahrenheits);
 }
 
-function formatDay(timestamp) {
-  let date = new Date(timestamp * 1000);
-  let day = date.getDay();
-  let days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-
-  return days[day];
-}
-
 function displayForecastFahrenheits(response) {
   let forecastDaily = response.data.daily;
   //console.log(forecastDaily);
@@ -277,6 +246,32 @@ celsius.addEventListener("click", clickCelsius);
 
 // CURRENT LOCATION - geolocation - navigator;
 
+function handleSubmit(event) {
+  event.preventDefault();
+  let city = document.querySelector("#city-search");
+  city = city.value;
+  //console.log(city);
+  city = city.trim();
+
+  let cityCaps = city.charAt(0).toUpperCase() + city.slice(1);
+  //city.innerHTML = cityCaps;
+  let cityName = document.querySelector("#city");
+  cityName.innerHTML = cityCaps;
+  searchCity(cityCaps);
+}
+
+function searchCity(city) {
+  let units = `metric`;
+  let apiKey = `4c09ae07987b07a4993b3f7e761af71d`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
+  //https://api.openweathermap.org/data/2.5/weather?q=Taipei&appid=4c09ae07987b07a4993b3f7e761af71d&units=metric`;
+
+  axios.get(apiUrl).then(showTemp);
+}
+
+let searchForm = document.querySelector("form");
+searchForm.addEventListener("submit", handleSubmit);
+
 function showMyLocation(response) {
   let city = response.data.name;
   //console.log(city);
@@ -304,3 +299,5 @@ function findMyLocation(position) {
 }
 
 navigator.geolocation.getCurrentPosition(findMyLocation);
+
+searchCity(`Taipei`);
